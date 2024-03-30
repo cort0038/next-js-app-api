@@ -6,20 +6,23 @@ export async function GET(city, country) {
 
 	try {
 		const response = await axios.get(url)
-
 		let data = response.data
+
 		if (data.length === 0) {
 			let message = "No location found"
-			// error(message)
 			console.warn(message)
-			return message
 		} else {
-			console.log(`${data.name}`, data)
-			return data
+			// console.log(`${data.name}`, data)
+			return new Response(JSON.stringify(data), {
+				status: 200,
+				statusText: "OK",
+				headers: {
+					"Content-Type": "application/json"
+				}
+			})
 		}
 	} catch {
 		let message = "Error fetching location"
-		console.warn(message)
-		return message
+		console.error(message)
 	}
 }
