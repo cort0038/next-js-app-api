@@ -4,7 +4,7 @@ import {FaSearch} from "react-icons/fa"
 const SearchBar = () => {
 	return (
 		<form>
-			<label>Type your city namee</label>
+			<label>Type your city name</label>
 			<input type="text" placeholder="Santo Domingo" />
 			<button type="submit">
 				<FaSearch />
