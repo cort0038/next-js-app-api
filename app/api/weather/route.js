@@ -11,6 +11,13 @@ export async function GET(city, country) {
 		if (data.length === 0) {
 			let message = "No location found"
 			console.warn(message)
+			return new Response(JSON.stringify({message}), {
+				status: 404,
+				statusText: "Not Found",
+				headers: {
+					"Content-Type": "application/json"
+				}
+			})
 		} else {
 			// console.log(`${data.name}`, data)
 			return new Response(JSON.stringify(data), {
@@ -24,5 +31,12 @@ export async function GET(city, country) {
 	} catch {
 		let message = "Error fetching location"
 		console.error(message)
+		return new Response(JSON.stringify({message}), {
+			status: 500,
+			statusText: "Internal Server Error",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
 	}
 }
