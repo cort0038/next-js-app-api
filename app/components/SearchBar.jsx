@@ -20,6 +20,7 @@ const SearchBar = ({onSearch}) => {
 				windspeed: response.wind.speed
 			}
 			onSearch(data)
+			return data
 		})
 	}
 
