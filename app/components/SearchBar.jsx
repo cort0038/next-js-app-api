@@ -11,17 +11,30 @@ const SearchBar = ({onSearch}) => {
 		const [city, country = ""] = searchText.split(", ").map(item => item.trim())
 
 		setSearchText("")
-		await GET(city, country).then(response => {
-			let data = {
-				city: response.name,
-				country: response.sys.country,
-				temperature: response.main.temp,
-				weather: response.weather[0].description,
-				windspeed: response.wind.speed
+
+		async function getWeather() {
+			try {
+				const response = await GET(city, country)
+				if (response && response.status === 200) {
+					const data = await response.json()
+
+					let weather = {
+						city: data.name,
+						country: data.sys.country,
+						temperature: data.main.temp,
+						weather: data.weather[0].description,
+						windspeed: data.wind.speed
+					}
+
+					onSearch(weather)
+				} else {
+					console.log("No location found")
+				}
+			} catch (error) {
+				console.error("Error fetching location")
 			}
-			onSearch(data)
-			return data
-		})
+		}
+		getWeather()
 	}
 
 	return (
