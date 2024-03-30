@@ -7,14 +7,14 @@ export async function GET(city, country) {
 	try {
 		const response = await axios.get(url)
 
-		if (response.data.length === 0) {
+		let data = response.data
+		if (data.length === 0) {
 			let message = "No location found"
 			// error(message)
 			console.warn(message)
 		} else {
-			let location = response.data
-			console.log(`${location.name}`, location)
-			return location
+			console.log(`${data.name}`, data)
+			return data
 		}
 	} catch {
 		let message = "Error fetching location"
