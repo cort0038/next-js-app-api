@@ -6,10 +6,10 @@ const Masthead = () => {
 			<h1 className="head_text text-center">
 				Discover
 				<br />
-				<span className="blue_gradient text-center"> The Perfect Food & Movie for Today</span>
+				<span className="blue_gradient text-center"> The Perfect Food &amp; Movie for Today</span>
 			</h1>
 			<p className="desc text-center">
-				Get recommendations for movies to watch and delicious recipes to cook according to today's weather!
+				Get recommendations for movies to watch and delicious recipes to cook according to today&apos;s weather!
 			</p>
 		</div>
 	)
