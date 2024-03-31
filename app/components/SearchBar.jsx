@@ -1,40 +1,16 @@
 "use client"
-import {GET} from "@API/weather/route"
 import {useState} from "react"
 import {FaSearch} from "react-icons/fa"
+import {useRouter} from "next/navigation"
 
-const SearchBar = ({onSearch}) => {
+const SearchBar = () => {
+	const router = useRouter()
 	const [searchText, setSearchText] = useState("")
 
 	const handleSubmit = async ev => {
 		ev.preventDefault()
-		const [city, country = ""] = searchText.split(", ").map(item => item.trim())
-
-		setSearchText("")
-
-		async function getWeather() {
-			try {
-				const response = await GET(city, country)
-				if (response && response.status === 200) {
-					const data = await response.json()
-
-					let weather = {
-						city: data.name,
-						country: data.sys.country,
-						temperature: data.main.temp,
-						weather: data.weather[0].description,
-						windspeed: data.wind.speed
-					}
-
-					onSearch(weather)
-				} else {
-					console.log("No location found")
-				}
-			} catch (error) {
-				console.error("Error fetching location")
-			}
-		}
-		getWeather()
+		searchText.split(", ").map(item => item.trim())
+		router.push(`/${searchText}`)
 	}
 
 	return (
