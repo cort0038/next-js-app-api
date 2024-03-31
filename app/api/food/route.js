@@ -11,7 +11,11 @@ export async function GET(request) {
 		"3aa5ed4456b149bf814db448045e27f4"
 
 	const res = await fetch(url)
-	let data = await res.json()
-	return NextResponse.json(data)
-}
 
+	if (!res.ok) {
+		return NextResponse.error("Error fetching data", res.status)
+	} else {
+		let data = await res.json()
+		return NextResponse.json(data)
+	}
+}
