@@ -34,24 +34,28 @@ export default function MoviePage(props) {
 	return (
 		<>
 			{data ? (
-				<div className="mt-20">
+				<div className="mt-20 mb-20">
 					<div className="grid grid-cols-2 font-bold text-lg">
 						<a href={back} className="flex gap-2 items-center">
 							<IoMdArrowRoundBack />
-							Back to {location} Weather
+							Back to Weather
 						</a>
 						<a href="/" className="flex gap-2 items-center justify-end">
-							<FaSearch /> Make a New Search
+							<FaSearch /> New Search
 						</a>
 					</div>
-					<h2 className="text-center orange_gradient text-2xl font-extrabold">Movies for {condition} weather</h2>
+					<h2 className="text-center orange_gradient text-2xl font-extrabold mt-10">
+						Movies for {location} weather
+					</h2>
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
 						{data &&
 							data.map((movie, index) => (
 								<div key={index} className="bg-white rounded-lg shadow-md">
 									<Image
 										src={
-											movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : imagePlaceholder
+											movie.poster_path
+												? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+												: imagePlaceholder
 										}
 										alt={movie.title || "No image available"}
 										width={500}
