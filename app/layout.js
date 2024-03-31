@@ -1,4 +1,5 @@
 import "./globals.css"
+import Masthead from "@Components/Masthead"
 
 export const metadata = {
 	title: "Perfect Food & Movie",
@@ -17,7 +18,10 @@ export default function RootLayout({children}) {
 				<div className="main">
 					<div className="gradient" />
 				</div>
-				<main className="app">{children}</main>
+				<main className="app">
+					<Masthead />
+					{children}
+				</main>
 			</body>
 		</html>
 	)
