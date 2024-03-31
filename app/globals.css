@@ -62,7 +62,7 @@
 }
 
 .orange_gradient {
-	@apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
+	@apply bg-gradient-to-r from-amber-800 via-orange-700 to-yellow-600 bg-clip-text text-transparent;
 }
 
 .green_gradient {
