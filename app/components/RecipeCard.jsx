@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"
 import {useRouter} from "next/navigation"
-
+import Image from "next/image"
+import myImage from "@Public/food.svg"
 export default function RecipeCard({data, input}) {
 	const router = useRouter()
 
@@ -16,10 +17,11 @@ export default function RecipeCard({data, input}) {
 	}
 
 	return (
-		<div
-			className="rounded-lg text-black bg-slate-300 pr-12 pl-12 pt-6 pb-6 text-center cursor-pointer w-fit"
-			onClick={handleSubmit}>
-			<h3>Today&apos;s Perfect Recipe</h3>
+		<div className="rounded-lg text-black bg-slate-300 text-center cursor-pointer p-3" onClick={handleSubmit}>
+			<div className="flex">
+				<Image src={myImage} width={48} height={48} alt="recipe icon" />
+				<p className="flex gap-2 items-center">Today&apos;s Perfect Recipe</p>
+			</div>
 		</div>
 	)
 }
