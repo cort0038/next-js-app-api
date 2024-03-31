@@ -5,6 +5,7 @@ import MovieCard from "@Components/MovieCard"
 import RecipeCard from "@Components/RecipeCard"
 import WeatherCard from "@Components/WeatherCard"
 import {useEffect, useState} from "react"
+import Loader from "@Components/Loader"
 
 export default function LocationPage(props) {
 	let location = decodeURIComponent(props.params.location)
@@ -33,18 +34,26 @@ export default function LocationPage(props) {
 	}, [input])
 
 	return (
-		<div className="mt-20">
-			<h2 className="text-center orange_gradient text-2xl font-extrabold">Let's enjoy the day in {newLocation}</h2>
-			<div className="pt-10 pb-10">
-				<WeatherCard data={data} />
-			</div>
-			<div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-5 mt-5">
-				<MovieCard data={data} input={input} />
-				<RecipeCard data={data} input={input} />
-			</div>
-			<a className="justify-center gap-2 flex pt-10 font-bold text-lg items-center" href="/">
-				<FaSearch /> Make a New Search
-			</a>
-		</div>
+		<>
+			{data ? (
+				<div className="mt-20">
+					<h2 className="text-center orange_gradient text-2xl font-extrabold">
+						Let's enjoy the day in {newLocation}
+					</h2>
+					<div className="pt-10 pb-10">
+						<WeatherCard data={data} />
+					</div>
+					<div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-5 mt-5">
+						<MovieCard data={data} input={input} />
+						<RecipeCard data={data} input={input} />
+					</div>
+					<a className="justify-center gap-2 flex pt-10 font-bold text-lg items-center" href="/">
+						<FaSearch /> Make a New Search
+					</a>
+				</div>
+			) : (
+				<Loader />
+			)}
+		</>
 	)
 }
