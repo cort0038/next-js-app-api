@@ -26,5 +26,5 @@ export default function MovieCard({data, input}) {
 
 MovieCard.propTypes = {
 	data: PropTypes.object,
-	input: PropTypes.string,
+	input: PropTypes.string
 }

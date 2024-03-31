@@ -1,5 +1,6 @@
 "use client"
 
+import {FaSearch} from "react-icons/fa"
 import MovieCard from "@Components/MovieCard"
 import RecipeCard from "@Components/RecipeCard"
 import WeatherCard from "@Components/WeatherCard"
@@ -39,8 +40,11 @@ export default function LocationPage(props) {
 			</div>
 			<div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-5 mt-5">
 				<MovieCard data={data} input={input} />
-				<RecipeCard data={data} />
+				<RecipeCard data={data} input={input} />
 			</div>
+			<a className="justify-center gap-2 flex pt-10 font-bold text-lg items-center" href="/">
+				<FaSearch /> Make a New Search
+			</a>
 		</div>
 	)
 }
