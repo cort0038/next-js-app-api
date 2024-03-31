@@ -1,11 +1,16 @@
 "use client"
-
+import imagePlaceholder from "@Public/image-placeholder.svg"
 import Image from "next/image"
 import React, {useEffect, useState} from "react"
+import {IoArrowBackCircleSharp} from "react-icons/io5"
+import {FaSearch} from "react-icons/fa"
 
 export default function MoviePage(props) {
 	let condition = decodeURIComponent(props.searchParams.w)
-	
+	let location = decodeURIComponent(props.params.location)
+
+	let back = "/" + location
+
 	const [data, setData] = useState(null)
 
 	async function getMovies(condition) {
@@ -27,24 +32,28 @@ export default function MoviePage(props) {
 
 	return (
 		<div className="mt-20">
+			<div className="grid grid-cols-2 font-bold text-lg">
+				<a href={back} className="flex gap-2 items-center">
+					<IoArrowBackCircleSharp />
+					Back to {location} Weather
+				</a>
+				<a href="/" className="flex gap-2 items-center justify-end">
+					<FaSearch /> Make a New Search
+				</a>
+			</div>
 			<h2 className="text-center orange_gradient text-2xl font-extrabold">Movies for {condition} weather</h2>
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
 				{data &&
 					data.map((movie, index) => (
 						<div key={index} className="bg-white rounded-lg shadow-md">
 							<Image
-								src={
-									movie.poster_path
-										? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-										: "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
-								}
+								src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : imagePlaceholder}
 								alt={movie.title || "No image available"}
 								width={500}
 								height={750}
 								onError={({currentTarget}) => {
 									currentTarget.onerror = null
-									currentTarget.src =
-										"https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
+									currentTarget.src = {imagePlaceholder}
 								}}
 							/>
 							<div className="p-5">
@@ -57,5 +66,3 @@ export default function MoviePage(props) {
 		</div>
 	)
 }
-
-//https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg
