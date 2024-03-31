@@ -1,42 +1,12 @@
-import axios from "axios"
+import {NextRequest, NextResponse} from "next/server"
 
-export async function GET(city, country) {
-	let apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY
-	let url = `https://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${apiKey}&units=metric`
+export async function GET(request) {
+	const params = new URL(request.url).searchParams
+	const address = params.get("address")
+	let url =
+		"https://api.openweathermap.org/data/2.5/weather?q=" + address + "&appid=" + "2d348ed82bb66578c7d2a97cc268f8d1"
 
-	try {
-		const response = await axios.get(url)
-		let data = response.data
-
-		if (data.length === 0) {
-			let message = "No location found"
-			console.warn(message)
-			return new Response(JSON.stringify({message}), {
-				status: 404,
-				statusText: "Not Found",
-				headers: {
-					"Content-Type": "application/json"
-				}
-			})
-		} else {
-			// console.log(`${data.name}`, data)
-			return new Response(JSON.stringify(data), {
-				status: 200,
-				statusText: "OK",
-				headers: {
-					"Content-Type": "application/json"
-				}
-			})
-		}
-	} catch {
-		let message = "Error fetching location"
-		console.error(message)
-		return new Response(JSON.stringify({message}), {
-			status: 500,
-			statusText: "Internal Server Error",
-			headers: {
-				"Content-Type": "application/json"
-			}
-		})
-	}
+	const res = await fetch(url)
+	let data = await res.json()
+	return NextResponse.json(data)
 }
