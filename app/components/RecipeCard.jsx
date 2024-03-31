@@ -1,18 +1,30 @@
 import PropTypes from "prop-types"
+import {useRouter} from "next/navigation"
 
-export default function RecipeCard({weather}) {
-	if (weather) {
-		console.log(weather.conditions)
-		console.log(weather)
+export default function RecipeCard({data, input}) {
+	const router = useRouter()
+
+	if (!data) {
+		return null
+	}
+	let conditions = data.weather[0].main
+	let url = "/" + encodeURIComponent(input) + "/food?w=" + conditions
+
+	const handleSubmit = async ev => {
+		ev.preventDefault()
+		router.push(url)
 	}
 
 	return (
-		<div className="rounded-lg text-black bg-slate-300 pr-12 pl-12 pt-6 pb-6 text-center cursor-pointer w-fit">
+		<div
+			className="rounded-lg text-black bg-slate-300 pr-12 pl-12 pt-6 pb-6 text-center cursor-pointer w-fit"
+			onClick={handleSubmit}>
 			<h3>Today&apos;s Perfect Recipe</h3>
 		</div>
 	)
 }
 
 RecipeCard.propTypes = {
-	weather: PropTypes.object,
+	data: PropTypes.object,
+	input: PropTypes.string
 }
