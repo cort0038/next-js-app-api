@@ -17,7 +17,7 @@ export default function LocationPage(props) {
 
 	async function getWeather(input) {
 		try {
-			const response = await fetch("http://localhost:3000/api/weather?address=" + input)
+			const response = await fetch("/api/weather?address=" + input)
 			const json = await response.json()
 			setData(json)
 		} catch (error) {
