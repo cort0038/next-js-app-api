@@ -1,8 +1,31 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
 	reactStrictMode: true,
+
 	images: {
-		domains: ["localhost", "image.tmdb.org", "img.spoonacular.com", "openweathermap.org"]
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "image.tmdb.org",
+				port: "",
+				pathname: "/**"
+			},
+
+			{
+				protocol: "https",
+				hostname: "img.spoonacular.com",
+				port: "",
+				pathname: "/**"
+			},
+
+			{
+				protocol: "https",
+				hostname: "openweathermap.org",
+				port: "",
+				pathname: "/**"
+			}
+		]
 	}
 }
 
