@@ -5,7 +5,7 @@ import MovieCard from "@Components/MovieCard"
 import RecipeCard from "@Components/RecipeCard"
 import WeatherCard from "@Components/WeatherCard"
 import {useEffect, useState} from "react"
-import Loader from "@Components/Loader"
+import PageLoader from "@Components/PageLoader"
 
 export default function LocationPage(props) {
 	let location = decodeURIComponent(props.params.location)
@@ -22,6 +22,7 @@ export default function LocationPage(props) {
 			const response = await fetch("/api/weather?address=" + input)
 			const json = await response.json()
 			setData(json)
+			console.log(json)
 		} catch (error) {
 			console.error("Error fetching location")
 		}
@@ -53,7 +54,7 @@ export default function LocationPage(props) {
 					</div>
 				</div>
 			) : (
-				<Loader />
+				<PageLoader />
 			)}
 		</>
 	)

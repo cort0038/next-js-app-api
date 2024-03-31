@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react"
 import Image from "next/image"
 import {FaSearch} from "react-icons/fa"
 import {IoMdArrowRoundBack} from "react-icons/io"
-import Loader from "@Components/Loader"
+import PageLoader from "@app/components/PageLoader"
 
 export default function FoodPage(props) {
 	let condition = decodeURIComponent(props.searchParams.w)
@@ -67,7 +67,7 @@ export default function FoodPage(props) {
 					</div>
 				</div>
 			) : (
-				<Loader />
+				<PageLoader />
 			)}
 		</>
 	)

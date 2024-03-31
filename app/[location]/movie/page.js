@@ -4,15 +4,15 @@ import Image from "next/image"
 import React, {useEffect, useState} from "react"
 import {IoMdArrowRoundBack} from "react-icons/io"
 import {FaSearch} from "react-icons/fa"
-import Loader from "@Components/Loader"
+import PageLoader from "@Components/PageLoader"
 
 export default function MoviePage(props) {
+	const [data, setData] = useState(null)
+
 	let condition = decodeURIComponent(props.searchParams.w)
 	let location = decodeURIComponent(props.params.location)
 
 	let back = "/" + location
-
-	const [data, setData] = useState(null)
 
 	async function getMovies(condition) {
 		try {
@@ -24,8 +24,6 @@ export default function MoviePage(props) {
 			console.error("Error fetching location")
 		}
 	}
-
-	console.log(data)
 
 	useEffect(() => {
 		getMovies(condition)
@@ -57,14 +55,11 @@ export default function MoviePage(props) {
 												? `https://image.tmdb.org/t/p/original${movie.poster_path}`
 												: imagePlaceholder
 										}
-										alt={movie.title || "No image available"}
+										alt={movie.title || "Title no available"}
 										width={500}
-										height={750}
-										onError={({currentTarget}) => {
-											currentTarget.onerror = null
-											currentTarget.src = {imagePlaceholder}
-										}}
+										height={450}
 									/>
+
 									<div className="p-5">
 										<h3 className="text-xl font-semibold">{movie.title}</h3>
 										<p className="text-sm text-gray-500">{movie.release_date}</p>
@@ -74,7 +69,7 @@ export default function MoviePage(props) {
 					</div>
 				</div>
 			) : (
-				<Loader />
+				<PageLoader />
 			)}
 		</>
 	)
