@@ -10,7 +10,7 @@ export default function MoviePage(props) {
 
 	async function getMovies(condition) {
 		try {
-			const response = await fetch("http://localhost:3000/api/movies?weather=" + condition)
+			const response = await fetch("/api/movies?weather=" + condition)
 
 			const json = await response.json()
 			setData(json.results)
