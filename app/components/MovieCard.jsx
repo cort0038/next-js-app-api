@@ -1,5 +1,7 @@
 import {useRouter} from "next/navigation"
 import PropTypes from "prop-types"
+import myImage from "@Public/movie.png"
+import Image from "next/image"
 
 export default function MovieCard({data, input}) {
 	const router = useRouter()
@@ -16,10 +18,12 @@ export default function MovieCard({data, input}) {
 	}
 
 	return (
-		<div
-			className="rounded-lg text-black bg-slate-300 pr-12 pl-12 pt-6 pb-6 text-center cursor-pointer w-fit"
-			onClick={handleSubmit}>
-			<h3>Today&apos;s Perfect Movie</h3>
+		<div className="rounded-lg text-black bg-slate-300 text-center p-6 cursor-pointer " onClick={handleSubmit}>
+			<div className="flex gap-2">
+				<Image src={myImage} width={28} height={28} alt="food icon" />
+
+				<p className="flex gap-2 items-center">Today&apos;s Perfect Movie</p>
+			</div>
 		</div>
 	)
 }
