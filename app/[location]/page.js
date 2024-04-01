@@ -5,8 +5,12 @@ import MovieCard from "@Components/MovieCard"
 import RecipeCard from "@Components/RecipeCard"
 import WeatherCard from "@Components/WeatherCard"
 import {useEffect, useState} from "react"
+import Feedback from "@Components/Feedback"
 
 export default function LocationPage(props) {
+	const [error, setError] = useState(null)
+	const [data, setData] = useState(null)
+
 	let location = decodeURIComponent(props.params.location)
 
 	let input = location
@@ -14,17 +18,20 @@ export default function LocationPage(props) {
 		.map(item => item.trim())
 		.join(",")
 
-	const [data, setData] = useState(null)
-
 	async function getWeather(input) {
 		try {
 			const response = await fetch("/api/weather?address=" + input, {
 				method: "GET"
 			})
+			if (!response.ok) {
+				console.error("Not location found. Try again.")
+				setError("Not location found. Try again.")
+				return
+			}
 			const json = await response.json()
 			setData(json)
 		} catch (error) {
-			console.error("Error fetching location")
+			console.error(error)
 		}
 	}
 
@@ -37,9 +44,13 @@ export default function LocationPage(props) {
 	return (
 		<>
 			<div className="mt-20 mb-20">
-				<h2 className="text-center orange_gradient text-2xl font-extrabold">
-					Let's enjoy the day in {newLocation}
-				</h2>
+				{error && <Feedback error={error} clear={() => setError(error)} />}
+
+				{data && (
+					<h2 className="text-center orange_gradient text-2xl font-extrabold">
+						Let's enjoy the day in {newLocation}
+					</h2>
+				)}
 
 				<div className="mt-10 mb-10 flex items-center justify-center">
 					<WeatherCard data={data} />
