@@ -2,13 +2,22 @@ import PropTypes from "prop-types"
 import Image from "next/image"
 
 const WeatherCard = ({data}) => {
-	const weather = data.weather[0].description
-	const conditions = weather.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
+	let conditions
+
+	function capitalization() {
+		if (!data) {
+			return null
+		}
+		const weather = data.weather[0].description
+		conditions = weather.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase())
+	}
+
+	capitalization()
 
 	return (
-		data && (
-			<div className="flex items-center justify-center">
-				<div className="rounded-lg bg-cyan-200 text-black pr-12 pl-12 pt-6 pb-6 text-center cursor-pointer  w-fit">
+		<>
+			{data ? (
+				<div className="rounded-lg bg-cyan-200 text-black  text-center cursor-pointer flex flex-col justify-center w-72 h-48">
 					<h2 className="font-bold">{conditions}</h2>
 					<div className="flex items-center justify-center">
 						<Image
@@ -24,8 +33,19 @@ const WeatherCard = ({data}) => {
 						<p>Wind speed is {data.wind.speed} Km/h</p>
 					</div>
 				</div>
-			</div>
-		)
+			) : (
+				<div className="rounded-lg shadow-md animate-pulse h-48 w-72 bg-cyan-200">
+					<div className="flex flex-col gap-2 p-10">
+						<div className="skeleton h-3"></div>
+						<div className="skeleton h-3"></div>
+						<br />
+						<div className="skeleton h-3"></div>
+						<div className="skeleton h-3"></div>
+						<div className="skeleton h-3"></div>
+					</div>
+				</div>
+			)}
+		</>
 	)
 }
 
