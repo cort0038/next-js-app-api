@@ -21,7 +21,7 @@ export default function FoodPage(props) {
 			const json = await response.json()
 			setData(json.results)
 		} catch (error) {
-			console.error("Error fetching location")
+			console.error(error)
 		}
 	}
 
@@ -66,7 +66,7 @@ export default function FoodPage(props) {
 						  ))
 						: Array.from({length: 6}).map((_, index) => (
 								<div key={index} className="bg-white rounded-lg shadow-md animate-pulse">
-									<div className="skeleton h-48 w-72" />
+									<div className="skeleton h-56 w-72" />
 									<div className="p-5">
 										<div className="skeleton h-8 w-full mb-2" />
 										<div className="skeleton h-4 w-full" />
