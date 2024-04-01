@@ -5,13 +5,14 @@ import myImage from "@Public/food.svg"
 export default function RecipeCard({data, input}) {
 	const router = useRouter()
 
-	if (!data) {
-		return null
-	}
-	let conditions = data.weather[0].main
-	let url = "/" + encodeURIComponent(input) + "/food?w=" + conditions
+	function handleSubmit(ev) {
+		if (!data) {
+			return null
+		}
 
-	const handleSubmit = async ev => {
+		let conditions = data.weather[0].main
+		let url = "/" + encodeURIComponent(input) + "/food?w=" + conditions
+
 		ev.preventDefault()
 		router.push(url)
 	}
