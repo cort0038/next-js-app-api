@@ -1,7 +1,7 @@
 export default function PageLoader() {
 	return (
-		<div class="center-screen">
-			<span class="loader"></span>
+		<div className="center-screen">
+			<span className="loader"></span>
 		</div>
 	)
 }
