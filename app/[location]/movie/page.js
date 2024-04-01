@@ -22,7 +22,7 @@ export default function MoviePage(props) {
 			const json = await response.json()
 			setData(json.results)
 		} catch (error) {
-			console.error("Error fetching location")
+			console.error(error)
 		}
 	}
 

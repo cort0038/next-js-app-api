@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import Image from "next/image"
 
-const WeatherCard = ({data}) => {
+export default function WeatherCard({data}) {
 	let conditions
 
 	function capitalization() {
@@ -48,8 +48,6 @@ const WeatherCard = ({data}) => {
 		</>
 	)
 }
-
-export default WeatherCard
 
 WeatherCard.propTypes = {
 	data: PropTypes.object

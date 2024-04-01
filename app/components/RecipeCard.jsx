@@ -2,6 +2,7 @@ import PropTypes from "prop-types"
 import {useRouter} from "next/navigation"
 import Image from "next/image"
 import myImage from "@Public/food.svg"
+
 export default function RecipeCard({data, input}) {
 	const router = useRouter()
 

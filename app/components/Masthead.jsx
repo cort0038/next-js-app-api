@@ -1,4 +1,4 @@
-const Masthead = () => {
+export default function Masthead() {
 	return (
 		<div>
 			<h1 className="mt-5 text-4xl md:text-5xl font-extrabold text-black  text-center">
@@ -12,5 +12,3 @@ const Masthead = () => {
 		</div>
 	)
 }
-
-export default Masthead
