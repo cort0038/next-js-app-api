@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+import withPlaiceholder from "@plaiceholder/next"
 
 const nextConfig = {
 	reactStrictMode: true,
@@ -24,9 +25,15 @@ const nextConfig = {
 				hostname: "openweathermap.org",
 				port: "",
 				pathname: "/**"
+			},
+			{
+				protocol: "https",
+				hostname: "via.placeholder.com",
+				port: "",
+				pathname: "/**"
 			}
 		]
 	}
 }
 
-export default nextConfig
+export default withPlaiceholder(nextConfig)
