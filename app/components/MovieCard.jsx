@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import myImage from "@Public/movie.png"
 import Image from "next/image"
 
-export default function MovieCard({data, input}) {
+export default function MovieCard({data, input, error}) {
 	const router = useRouter()
 
 	function handleSubmit(ev) {
@@ -19,16 +19,29 @@ export default function MovieCard({data, input}) {
 	}
 
 	return (
-		<div className="rounded-lg text-black bg-slate-300 text-center p-6 cursor-pointer " onClick={handleSubmit}>
-			<div className="flex gap-2">
-				<Image src={myImage} width={28} height={28} alt="food icon" />
-				<p className="flex gap-2 items-center">Today&apos;s Perfect Movie</p>
-			</div>
-		</div>
+		<>
+			{data ? (
+				<div
+					className="rounded-lg text-black bg-slate-300 text-center p-6 cursor-pointer h-20 w-72 flex items-center justify-center"
+					onClick={handleSubmit}>
+					<div className="flex gap-2">
+						<Image src={myImage} width={28} height={28} alt="food icon" />
+						<p className="flex gap-2 items-center">Today&apos;s Perfect Movie</p>
+					</div>
+				</div>
+			) : (
+				<div
+					className="rounded-lg text-black bg-slate-300 text-center p-6 cursor-pointer animate-pulse w-72 h-20 flex items-center justify-center"
+					style={{display: error && "none"}}>
+					<div className="skeleton w-56 h-6"></div>
+				</div>
+			)}
+		</>
 	)
 }
 
 MovieCard.propTypes = {
 	data: PropTypes.object,
-	input: PropTypes.string
+	input: PropTypes.string,
+	error: PropTypes.string,
 }
