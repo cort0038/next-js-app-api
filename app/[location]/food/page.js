@@ -19,7 +19,7 @@ export default function FoodPage(props) {
 			})
 
 			const json = await response.json()
-			setData(json.results)
+			setData(json.hits)
 		} catch (error) {
 			console.error(error)
 		}
@@ -47,26 +47,30 @@ export default function FoodPage(props) {
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
 					{data
 						? data.map((recipe, index) => (
-								<div key={index} className="bg-white rounded-lg shadow-md w-72 h-80">
+								<a
+									key={index}
+									className="bg-white rounded-lg shadow-md cursor-pointer"
+									target="_blank"
+									href={recipe.recipe.url}>
 									<Image
-										src={
-											recipe.image
-												? `https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`
-												: "https://via.placeholder.com/750x500"
-										}
-										alt={recipe.title || "No image available"}
+										src={recipe.recipe.image ? recipe.recipe.image : "https://via.placeholder.com/750x500"}
+										alt={recipe.recipe.label || "No image available"}
 										width={500}
 										height={750}
+										priority={true}
 									/>
 									<div className="p-5">
-										<h3 className="text-xl font-semibold">{recipe.title}</h3>
-										<p className="text-sm text-gray-500">15 minutes</p>
+										<p className="text-md font-semibold">{recipe.recipe.label}</p>
+										<div className="flex items-center gap-3">
+											<p className="text-sm">Meal Type:</p>
+											<p className="text-sm text-gray-500">{recipe.recipe.mealType}</p>
+										</div>
 									</div>
-								</div>
+								</a>
 						  ))
 						: Array.from({length: 6}).map((_, index) => (
-								<div key={index} className="bg-white rounded-lg shadow-md animate-pulse">
-									<div className="skeleton h-56 w-72" />
+								<div key={index} className="bg-white rounded-lg shadow-md animate-pulse w-80">
+									<div className="skeleton h-80 w-80" />
 									<div className="p-5">
 										<div className="skeleton h-8 w-full mb-2" />
 										<div className="skeleton h-4 w-full" />
