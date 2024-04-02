@@ -12,13 +12,11 @@ export default function LocationPage(props) {
 	const [error, setError] = useState(null)
 	const [data, setData] = useState(null)
 
-	console.log(props)
-
 	let input = decodeURIComponent(props.params.location)
 
 	async function getWeather(input) {
 		try {
-			const response = await fetch("/api/weather?address=" + input)
+			const response = await fetch(`/api/weather?address=${input}`)
 			if (!response.ok) {
 				console.error("Something went wrong. Try again.")
 				setError("Something went wrong. Try again.")

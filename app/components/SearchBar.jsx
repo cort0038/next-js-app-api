@@ -7,9 +7,9 @@ import Feedback from "@Components/Feedback"
 
 export default function SearchBar() {
 	const [error, setError] = useState(null)
+	const [searchText, setSearchText] = useState("")
 
 	const router = useRouter()
-	const [searchText, setSearchText] = useState("")
 
 	const handleSubmit = ev => {
 		ev.preventDefault()
