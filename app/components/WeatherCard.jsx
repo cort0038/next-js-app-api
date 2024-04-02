@@ -52,5 +52,6 @@ export default function WeatherCard({data, error}) {
 }
 
 WeatherCard.propTypes = {
-	data: PropTypes.object
+	data: PropTypes.object,
+	error: PropTypes.string
 }

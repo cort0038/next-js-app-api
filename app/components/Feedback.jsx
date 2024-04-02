@@ -28,5 +28,5 @@ export default function Feedback({error, clear}) {
 
 Feedback.propTypes = {
 	error: PropTypes.string,
-	clear: PropTypes.func
+	clear: PropTypes.func,
 }
