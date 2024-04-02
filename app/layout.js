@@ -15,12 +15,12 @@ export default function RootLayout({children}) {
 			</head>
 
 			<body>
-				<div className="main">
+				<main className="main">
 					<div className="gradient" />
-				</div>
-				<main className="app">
-					<Masthead />
-					{children}
+					<div className="app">
+						<Masthead />
+						{children}
+					</div>
 				</main>
 			</body>
 		</html>

@@ -8,8 +8,7 @@
 	position: fixed;
 	display: flex;
 	justify-content: center;
-	padding: 120px 24px 160px 24px;
-	pointer-events: none;
+	padding: 0 24px 160px 24px;
 }
 
 .main:before {
