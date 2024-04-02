@@ -44,7 +44,7 @@ export default function FoodPage(props) {
 				<h2 className="text-center orange_gradient text-2xl font-extrabold mt-10">
 					Recipes for {location} weather
 				</h2>
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
 					{data
 						? data.map((recipe, index) => (
 								<a
