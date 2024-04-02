@@ -18,9 +18,9 @@ export default function SearchBar() {
 			setError("Please enter a city name")
 			console.warn("Please enter a city name")
 			return
+		} else {
+			router.push(`/${searchText}`)
 		}
-
-		router.push(`/${searchText}`)
 	}
 
 	return (
