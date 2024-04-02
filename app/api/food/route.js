@@ -3,9 +3,10 @@ import {NextResponse} from "next/server"
 export async function GET(request) {
 	const params = new URL(request.url).searchParams
 	const weather = params.get("weather")
-	const apiKey = "3aa5ed4456b149bf814db448045e27f4"
+	const appID = "6e5d154e"
+	const apiKey = "cb6ca3192ad3c522a175ad43e9cdd60e"
 
-	let url = `https://api.spoonacular.com/recipes/complexSearch?query=${weather}&apiKey=${apiKey}`
+	let url = `https://api.edamam.com/api/recipes/v2?type=public&q=${weather}&app_id=${appID}&app_key=${apiKey}`
 
 	const res = await fetch(url)
 
