@@ -4,7 +4,7 @@ export async function GET(request) {
 	const params = new URL(request.url).searchParams
 	const weather = params.get("weather")
 	const appID = "6e5d154e"
-	const apiKey = "cb6ca3192ad3c522a175ad43e9cdd60e"
+	const apiKey = process.env.EDAMAN_API_KEY
 
 	let url = `https://api.edamam.com/api/recipes/v2?type=public&q=${weather}&app_id=${appID}&app_key=${apiKey}`
 
