@@ -7,7 +7,13 @@ export async function GET(request) {
 
 	let url = `https://api.openweathermap.org/data/2.5/weather?q=${address}&appid=${apiKey}&units=metric`
 
-	const res = await fetch(url)
+	const res = await fetch(url, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		next: {revalidate: 60}
+	})
 
 	if (!res.ok) {
 		return NextResponse.error("Error fetching data", res.status)

@@ -6,18 +6,19 @@ import RecipeCard from "@Components/RecipeCard"
 import WeatherCard from "@Components/WeatherCard"
 import {useEffect, useState} from "react"
 import Feedback from "@Components/Feedback"
+import Link from "next/link"
 
 export default function LocationPage(props) {
 	const [error, setError] = useState(null)
 	const [data, setData] = useState(null)
 
+	console.log(props)
+
 	let input = decodeURIComponent(props.params.location)
 
 	async function getWeather(input) {
 		try {
-			const response = await fetch("/api/weather?address=" + input, {
-				method: "GET"
-			})
+			const response = await fetch("/api/weather?address=" + input)
 			if (!response.ok) {
 				console.error("Something went wrong. Try again.")
 				setError("Something went wrong. Try again.")
@@ -57,9 +58,9 @@ export default function LocationPage(props) {
 					<WeatherCard data={data} error={error} />
 				</div>
 
-				<a className="justify-center gap-2 flex mt-10 font-bold text-lg items-center " href="/">
+				<Link className="justify-center gap-2 flex mt-10 font-bold text-lg items-center " href="/">
 					<FaSearch /> Make a New Search
-				</a>
+				</Link>
 				<div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-5 mt-5">
 					<MovieCard data={data} input={input} error={error} />
 					<RecipeCard data={data} input={input} error={error} />

@@ -4,6 +4,7 @@ import Image from "next/image"
 import React, {useEffect, useState} from "react"
 import {IoMdArrowRoundBack} from "react-icons/io"
 import {FaSearch} from "react-icons/fa"
+import Link from "next/link"
 
 export default function MoviePage(props) {
 	const [data, setData] = useState(null)
@@ -11,13 +12,13 @@ export default function MoviePage(props) {
 	let condition = decodeURIComponent(props.searchParams.w)
 	let location = decodeURIComponent(props.params.location)
 
+	console.log(props)
+	
 	let back = "/" + location
 
 	async function getMovies(condition) {
 		try {
-			const response = await fetch("/api/movies?weather=" + condition, {
-				method: "GET"
-			})
+			const response = await fetch("/api/movies?weather=" + condition)
 
 			const json = await response.json()
 			setData(json.results)
@@ -34,13 +35,13 @@ export default function MoviePage(props) {
 		<>
 			<div className="mt-20 mb-20">
 				<div className="grid grid-cols-2 font-bold text-lg">
-					<a href={back} className="flex gap-2 items-center">
+					<Link href={back} className="flex gap-2 items-center">
 						<IoMdArrowRoundBack />
 						Back to Weather
-					</a>
-					<a href="/" className="flex gap-2 items-center justify-end">
+					</Link>
+					<Link href="/" className="flex gap-2 items-center justify-end">
 						<FaSearch /> New Search
-					</a>
+					</Link>
 				</div>
 				<h2 className="text-center orange_gradient text-2xl font-extrabold mt-10">
 					Movies for {location} weather

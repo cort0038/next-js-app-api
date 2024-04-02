@@ -8,7 +8,13 @@ export async function GET(request) {
 
 	let url = `https://api.edamam.com/api/recipes/v2?type=public&q=${weather}&app_id=${appID}&app_key=${apiKey}`
 
-	const res = await fetch(url)
+	const res = await fetch(url, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		next: {revalidate: 60}
+	})
 
 	if (!res.ok) {
 		return NextResponse.error("Error fetching data", res.status)

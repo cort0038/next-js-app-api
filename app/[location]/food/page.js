@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react"
 import Image from "next/image"
 import {FaSearch} from "react-icons/fa"
 import {IoMdArrowRoundBack} from "react-icons/io"
+import Link from "next/link"
 
 export default function FoodPage(props) {
 	const [data, setData] = useState(null)
@@ -10,13 +11,13 @@ export default function FoodPage(props) {
 	let condition = decodeURIComponent(props.searchParams.w)
 	let location = decodeURIComponent(props.params.location).split(",")[0]
 
+	console.log(props)
+
 	let back = "/" + location
 
 	async function getRecipes(condition) {
 		try {
-			const response = await fetch("/api/food?weather=" + condition, {
-				method: "GET"
-			})
+			const response = await fetch("/api/food?weather=" + condition)
 
 			const json = await response.json()
 			setData(json.hits)
@@ -33,13 +34,13 @@ export default function FoodPage(props) {
 		<>
 			<div className="mt-20 mb-20">
 				<div className="grid grid-cols-2 font-bold text-lg">
-					<a href={back} className="flex gap-2 items-center">
+					<Link href={back} className="flex gap-2 items-center">
 						<IoMdArrowRoundBack />
 						Back to Weather
-					</a>
-					<a href="/" className="flex gap-2 items-center justify-end">
+					</Link>
+					<Link href="/" className="flex gap-2 items-center justify-end">
 						<FaSearch /> New Search
-					</a>
+					</Link>
 				</div>
 				<h2 className="text-center orange_gradient text-2xl font-extrabold mt-10">
 					Recipes for {location} weather
@@ -47,7 +48,7 @@ export default function FoodPage(props) {
 				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
 					{data
 						? data.map((recipe, index) => (
-								<a
+								<Link
 									key={index}
 									className="bg-white rounded-lg shadow-md cursor-pointer"
 									target="_blank"
@@ -66,7 +67,7 @@ export default function FoodPage(props) {
 											<p className="text-sm text-gray-500">{recipe.recipe.mealType}</p>
 										</div>
 									</div>
-								</a>
+								</Link>
 						  ))
 						: Array.from({length: 6}).map((_, index) => (
 								<div key={index} className="bg-white rounded-lg shadow-md animate-pulse w-80">
