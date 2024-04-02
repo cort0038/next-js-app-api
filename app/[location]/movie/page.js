@@ -1,5 +1,5 @@
 "use client"
-import imagePlaceholder from "@Public/image-placeholder.svg"
+import imagePlaceholder from "@Public/image-placeholder.png"
 import Image from "next/image"
 import React, {useEffect, useState} from "react"
 import {IoMdArrowRoundBack} from "react-icons/io"
@@ -62,8 +62,15 @@ export default function MoviePage(props) {
 									/>
 
 									<div className="p-5">
-										<h3 className="text-xl font-semibold ">{movie.title}</h3>
-										<p className="text-sm text-gray-500  ">{movie.release_date}</p>
+										<p className="text-md font-semibold ">{movie.title}</p>
+										<div className="flex items-center gap-1">
+											<p className="text-sm">Release Date:</p>
+											<p className="text-sm text-gray-500">{movie.release_date || "No date available"}</p>
+										</div>
+										<div className="flex items-center gap-1">
+											<p className="text-sm">Rating:</p>
+											<p className="text-sm text-gray-500">{movie.vote_average || "No rating available"}</p>
+										</div>
 									</div>
 								</div>
 						  ))
