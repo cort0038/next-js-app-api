@@ -14,14 +14,10 @@ export default function RootLayout({children}) {
 				<link rel="icon" href="./favicon.ico" sizes="any" />
 			</head>
 
-			<body>
-				<main className="main">
-					<div className="gradient" />
-					<div className="app">
-						<Masthead />
-						{children}
-					</div>
-				</main>
+			<body className="pt-2 pb-6 pl-2 pr-2">
+				<div className="gradient" />
+				<Masthead />
+				{children}
 			</body>
 		</html>
 	)
