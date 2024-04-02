@@ -44,17 +44,26 @@ export default function LocationPage(props) {
 	return (
 		<>
 			<div className="mt-20 mb-20">
-				{error && <Feedback error={error} clear={() => setError(error)} />}
+				{error && (
+					<>
+						<Feedback error={error} clear={() => setError(error)} />
+					</>
+				)}
 
-				{data && (
-					<h2 className="text-center orange_gradient text-2xl font-extrabold">
+				{data ? (
+					<h2 className="text-center orange_gradient text-2xl font-extrabold" style={{display: error && "none"}}>
 						Let's enjoy the day in {newLocation}
 					</h2>
+				) : (
+					<div className="flex rounded-md skeleton justify-center items-center" style={{display: error && "none"}}>
+						<h2 className="text-2xl text-transparent font-extrabold">Let's enjoy the day in Ottawa, Canada</h2>
+					</div>
 				)}
 
 				<div className="mt-10 mb-10 flex items-center justify-center">
-					<WeatherCard data={data} />
+					<WeatherCard data={data} error={error}/>
 				</div>
+
 				<a className="justify-center gap-2 flex mt-10 font-bold text-lg items-center " href="/">
 					<FaSearch /> Make a New Search
 				</a>

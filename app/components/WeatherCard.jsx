@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import Image from "next/image"
 
-export default function WeatherCard({data}) {
+export default function WeatherCard({data, error}) {
 	let conditions
 
 	function capitalization() {
@@ -34,7 +34,9 @@ export default function WeatherCard({data}) {
 					</div>
 				</div>
 			) : (
-				<div className="rounded-lg shadow-md animate-pulse h-48 w-72 bg-cyan-200">
+				<div
+					className="rounded-lg shadow-md animate-pulse h-48 w-72 bg-cyan-200"
+					style={{display: error && "none"}}>
 					<div className="flex flex-col gap-2 p-10">
 						<div className="skeleton h-3"></div>
 						<div className="skeleton h-3"></div>
