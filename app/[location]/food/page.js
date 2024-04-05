@@ -58,7 +58,7 @@ export default function FoodPage(props) {
 										alt={recipe.recipe.label || "No image available"}
 										width={500}
 										height={750}
-										priority={true}
+										className="rounded-t-lg w-full h-48 object-cover"
 									/>
 									<div className="p-5">
 										<p className="text-md font-semibold">{recipe.recipe.label}</p>
@@ -70,8 +70,8 @@ export default function FoodPage(props) {
 								</Link>
 						  ))
 						: Array.from({length: 6}).map((_, index) => (
-								<div key={index} className="bg-white rounded-lg shadow-md animate-pulse w-80">
-									<div className="skeleton h-80 w-80" />
+								<div key={index} className="bg-white rounded-lg shadow-md animate-pulse">
+									<div className="skeleton h-48 w-full rounded-t-lg" />
 									<div className="p-5">
 										<div className="skeleton h-8 w-full mb-2" />
 										<div className="skeleton h-4 w-full" />

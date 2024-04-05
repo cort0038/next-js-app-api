@@ -13,7 +13,7 @@ export default function MoviePage(props) {
 	let location = decodeURIComponent(props.params.location)
 
 	console.log(props)
-	
+
 	let back = "/" + location
 
 	async function getMovies(condition) {
@@ -60,6 +60,7 @@ export default function MoviePage(props) {
 										blurDataURL={`data:https://image.tmdb.org/t/p/300${movie.poster_path}`}
 										width={500}
 										height={450}
+										className="rounded-t-lg w-full h-96 object-cover"
 									/>
 
 									<div className="p-5">
@@ -76,8 +77,8 @@ export default function MoviePage(props) {
 								</div>
 						  ))
 						: Array.from({length: 12}).map((_, index) => (
-								<div key={index} className="bg-white rounded-lg shadow-md animate-pulse w-80">
-									<div className="skeleton h-96 w-80" />
+								<div key={index} className="bg-white rounded-lg shadow-md animate-pulse">
+									<div className="skeleton h-96 w-full rounded-t-lg" />
 									<div className="p-5">
 										<div className="skeleton h-8 w-full mb-2" />
 										<div className="skeleton h-4 w-full" />
