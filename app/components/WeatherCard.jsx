@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import Image from "next/image"
 
-export default function WeatherCard({data, error}) {
+export default function WeatherCard({data}) {
 	let conditions
 
 	function capitalization() {
@@ -17,7 +17,7 @@ export default function WeatherCard({data, error}) {
 	return (
 		<>
 			{data ? (
-				<div className="rounded-lg bg-cyan-200 text-black  text-center cursor-pointer flex flex-col justify-center w-72 h-48">
+				<div className="rounded-lg bg-cyan-200 text-black  text-center flex flex-col justify-center w-72 h-48">
 					<h2 className="font-bold">{conditions}</h2>
 					<div className="flex items-center justify-center">
 						<Image
@@ -34,9 +34,7 @@ export default function WeatherCard({data, error}) {
 					</div>
 				</div>
 			) : (
-				<div
-					className="rounded-lg shadow-md animate-pulse h-48 w-72 bg-cyan-200"
-					style={{display: error && "none"}}>
+				<div className="rounded-lg shadow-md animate-pulse h-48 w-72 bg-cyan-200">
 					<div className="flex flex-col gap-2 p-10">
 						<div className="skeleton h-3"></div>
 						<div className="skeleton h-3"></div>
@@ -52,6 +50,5 @@ export default function WeatherCard({data, error}) {
 }
 
 WeatherCard.propTypes = {
-	data: PropTypes.object,
-	error: PropTypes.string
+	data: PropTypes.object
 }
