@@ -1,5 +1,3 @@
-import {NextResponse} from "next/server"
-
 export async function GET(request) {
 	const params = new URL(request.url).searchParams
 	const address = params.get("address")
@@ -7,20 +5,31 @@ export async function GET(request) {
 
 	let url = `https://api.openweathermap.org/data/2.5/weather?q=${address}&appid=${apiKey}&units=metric`
 
-	const res = await fetch(url, {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json"
-		},
-		next: {revalidate: 60}
-	})
-
-	if (!res.ok) {
-		return NextResponse.error("Error fetching data", res.status)
-	} else if (res.status === 404) {
-		return NextResponse.error("No data found", res.status)
-	} else {
+	try {
+		const res = await fetch(url)
 		let data = await res.json()
-		return NextResponse.json(data)
+
+		if (data.cod === "404") {
+			return new Response(JSON.stringify({error: data.message}), {
+				status: 404,
+				headers: {
+					"Content-Type": "application/json"
+				}
+			})
+		} else {
+			return new Response(JSON.stringify(data), {
+				status: 200,
+				headers: {
+					"Content-Type": "application/json"
+				}
+			})
+		}
+	} catch (error) {
+		return new Response(JSON.stringify({error: error.message}), {
+			status: 500,
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
 	}
 }
