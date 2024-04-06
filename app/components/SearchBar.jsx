@@ -3,24 +3,15 @@
 import {useState} from "react"
 import {FaSearch} from "react-icons/fa"
 import {useRouter} from "next/navigation"
-import Feedback from "@Components/Feedback"
 
 export default function SearchBar() {
-	const [error, setError] = useState(null)
 	const [searchText, setSearchText] = useState("")
 
 	const router = useRouter()
 
 	const handleSubmit = ev => {
 		ev.preventDefault()
-
-		if (searchText === "") {
-			setError("Please enter a city name")
-			console.warn("Please enter a city name")
-			return
-		} else {
-			router.push(`/${searchText}`)
-		}
+		router.push(`/${searchText}`)
 	}
 
 	return (
@@ -36,6 +27,7 @@ export default function SearchBar() {
 					type="text"
 					id="formInput"
 					name="formInput"
+					required
 					placeholder="Ottawa, CA"
 					value={searchText}
 					onChange={e => {
@@ -48,7 +40,6 @@ export default function SearchBar() {
 					<FaSearch /> Search
 				</button>
 			</form>
-			<Feedback error={error} clear={() => setError(null)} />
 		</>
 	)
 }
