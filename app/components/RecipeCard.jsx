@@ -1,20 +1,20 @@
+"use client"
 import PropTypes from "prop-types"
-import {useRouter} from "next/navigation"
+import {useRouter, useParams} from "next/navigation"
 import Image from "next/image"
 import myImage from "@Public/food.svg"
 
-export default function RecipeCard({data, input, error}) {
+export default function RecipeCard({data}) {
 	const router = useRouter()
+	const {location} = useParams()
 
-	function handleSubmit(ev) {
+	function handleClick() {
 		if (!data) {
 			return null
 		}
 
 		let conditions = data.weather[0].main
-		let url = "/" + encodeURIComponent(input) + "/food?w=" + conditions
-
-		ev.preventDefault()
+		let url = `/${location}/food?w=${conditions}`
 		router.push(url)
 	}
 
@@ -23,16 +23,14 @@ export default function RecipeCard({data, input, error}) {
 			{data ? (
 				<div
 					className="rounded-lg text-black bg-slate-300 text-center cursor-pointer p-6 h-20 w-72 flex items-center justify-center"
-					onClick={handleSubmit}>
+					onClick={handleClick}>
 					<div className="flex">
 						<Image src={myImage} width={48} height={48} alt="recipe icon" />
 						<p className="flex gap-2 items-center">Today&apos;s Perfect Recipe</p>
 					</div>
 				</div>
 			) : (
-				<div
-					className="rounded-lg text-black bg-slate-300 text-center p-6 cursor-pointer animate-pulse w-72 h-20 flex items-center justify-center"
-					style={{display: error && "none"}}>
+				<div className="rounded-lg text-black bg-slate-300 text-center p-6 cursor-pointer animate-pulse w-72 h-20 flex items-center justify-center">
 					<div className="skeleton w-56 h-6"></div>
 				</div>
 			)}
@@ -41,7 +39,5 @@ export default function RecipeCard({data, input, error}) {
 }
 
 RecipeCard.propTypes = {
-	data: PropTypes.object,
-	input: PropTypes.string,
-	error: PropTypes.string,
+	data: PropTypes.object
 }
