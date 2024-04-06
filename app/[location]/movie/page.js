@@ -20,7 +20,7 @@ export default async function MoviePage({params, searchParams}) {
 					</Link>
 				</div>
 				<p className="text-center mt-10 text-red-600 font-bold pt-10">
-					No movies found for {searchParams.w} weather in {params.location}
+					No movies found for {searchParams.w} weather in {decodeURIComponent(params.location)}
 				</p>
 			</>
 		)
@@ -56,7 +56,7 @@ export default async function MoviePage({params, searchParams}) {
 						</Link>
 					</div>
 					<h2 className="text-center orange_gradient text-2xl font-extrabold mt-10">
-						Movies for {params.location} weather
+						Movies for {decodeURIComponent(params.location)} weather
 					</h2>
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
 						{data

@@ -10,7 +10,7 @@ export default async function LocationPage({params}) {
 	if (response.status === 404) {
 		return (
 			<>
-				<p className="text-center mt-10 text-red-600 font-bold pt-10">City "{params.location}" not found. Please, try again.</p>
+				<p className="text-center mt-10 text-red-600 font-bold pt-10">City "{decodeURIComponent(params.location)}" not found. Please, try again.</p>
 				<Link className="justify-center gap-2 flex mt-10 font-bold text-lg items-center " href="/">
 					<FaSearch /> Make a New Search
 				</Link>
