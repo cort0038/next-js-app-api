@@ -68,7 +68,7 @@ export default async function MoviePage({params, searchParams}) {
 													: imagePlaceholder
 											}
 											alt={movie.title || "Title no available"}
-											className="rounded-t-lg w-full h-96"
+											className="rounded-t-lg w-full h-96 object-cover"
 											width={500}
 											height={450}
 										/>
