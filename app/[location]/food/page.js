@@ -41,7 +41,7 @@ export default async function FoodPage({params, searchParams}) {
 		)
 	} else {
 		let data = await response.json()
-		
+
 		return (
 			<>
 				<div className="mt-20 mb-20">
@@ -60,28 +60,20 @@ export default async function FoodPage({params, searchParams}) {
 					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
 						{data
-							? data.hits.map((recipe, index) => (
-									<Link
-										key={index}
-										className="bg-white rounded-lg shadow-md cursor-pointer"
-										target="_blank"
-										href={recipe.recipe.url}>
+							? data.results.map((recipe, index) => (
+									<div key={index} className="bg-white rounded-lg shadow-md" target="_blank">
 										<Image
-											src={recipe.recipe.image ? recipe.recipe.image : "https://via.placeholder.com/750x500"}
-											alt={recipe.recipe.label || "No image available"}
+											src={recipe.image ? recipe.image : "https://via.placeholder.com/750x500"}
+											alt={"Food Image"}
 											width={500}
 											height={750}
 											className="rounded-t-lg w-full h-48 object-cover"
-											unoptimized={true}
 										/>
 										<div className="p-5">
-											<p className="text-md font-semibold">{recipe.recipe.label}</p>
-											<div className="flex items-center gap-3">
-												<p className="text-sm">Meal Type:</p>
-												<p className="text-sm text-gray-500">{recipe.recipe.mealType}</p>
-											</div>
+											<p className="text-md font-semibold">{recipe.title}</p>
+											<div className="flex items-center gap-3"></div>
 										</div>
-									</Link>
+									</div>
 							  ))
 							: Array.from({length: 6}).map((_, index) => (
 									<div key={index} className="bg-white rounded-lg shadow-md animate-pulse">

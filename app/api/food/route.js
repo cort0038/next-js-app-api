@@ -1,18 +1,16 @@
 export async function GET(request) {
 	const params = new URL(request.url).searchParams
 	const weather = params.get("weather")
-	const appID = process.env.EDAMAN_ID
-	const apiKey = process.env.EDAMAN_API_KEY
+	const apiKey = process.env.SPOONACULAR_API_KEY
 
-	let url = `https://api.edamam.com/api/recipes/v2?type=public&q=${weather}&app_id=${appID}&app_key=${apiKey}`
+	let url = `https://api.spoonacular.com/recipes/complexSearch?query=${weather}&apiKey=${apiKey}&number=20`
 
 	try {
 		const res = await fetch(url, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json"
-			},
-			mode: "cors"
+			}
 		})
 		let data = await res.json()
 
@@ -32,7 +30,6 @@ export async function GET(request) {
 			})
 		}
 	} catch (error) {
-		console.log("sf", typeof data)
 		return new Response(JSON.stringify({error: error.message} || {error: "Something went wrong"}), {
 			status: 500,
 			headers: {
