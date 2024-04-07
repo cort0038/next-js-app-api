@@ -7,7 +7,13 @@ export async function GET(request) {
 	let url = `https://api.edamam.com/api/recipes/v2?type=public&q=${weather}&app_id=${appID}&app_key=${apiKey}`
 
 	try {
-		const res = await fetch(url)
+		const res = await fetch(url, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			mode: "cors"
+		})
 		let data = await res.json()
 
 		if (data.cod === "404" || data.count === 0) {
@@ -26,6 +32,7 @@ export async function GET(request) {
 			})
 		}
 	} catch (error) {
+		console.log("sf", typeof data)
 		return new Response(JSON.stringify({error: error.message} || {error: "Something went wrong"}), {
 			status: 500,
 			headers: {
