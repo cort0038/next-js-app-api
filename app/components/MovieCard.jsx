@@ -13,7 +13,7 @@ export default function MovieCard({data}) {
 			return null
 		}
 
-		let conditions = data.weather[0].main
+		let conditions = data.weather[0].main.toLowerCase()
 		let url = `/${location}/movie?w=${conditions}`
 		router.push(url)
 	}
