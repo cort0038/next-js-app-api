@@ -8,7 +8,6 @@ export default async function MoviePage({params, searchParams}) {
 	let response = await fetch(`${process.env.ROOT_URL}/api/movies?weather=${searchParams.w}`)
 
 	if (response.status === 404) {
-		console.log("Response:", response.status)
 		return (
 			<>
 				<div className="grid grid-cols-2 font-bold text-lg pt-10">
@@ -26,7 +25,6 @@ export default async function MoviePage({params, searchParams}) {
 			</>
 		)
 	} else if (response.status === 500) {
-		console.log("Response:", response.status)
 		return (
 			<>
 				<div className="grid grid-cols-2 font-bold text-lg pt-10">
@@ -44,7 +42,6 @@ export default async function MoviePage({params, searchParams}) {
 		)
 	} else {
 		let data = await response.json()
-		console.log("Response:", data)
 		return (
 			<>
 				<div className="mt-20 mb-20">

@@ -7,7 +7,6 @@ export default async function FoodPage({params, searchParams}) {
 	let response = await fetch(`${process.env.ROOT_URL}/api/food?weather=${searchParams.w}`)
 
 	if (response.status === 404) {
-		console.log("Response:", response.status)
 		return (
 			<>
 				<div className="grid grid-cols-2 font-bold text-lg pt-10">
@@ -25,7 +24,6 @@ export default async function FoodPage({params, searchParams}) {
 			</>
 		)
 	} else if (response.status === 500) {
-		console.log("Response:", response.status)
 		return (
 			<>
 				<div className="grid grid-cols-2 font-bold text-lg pt-10">
@@ -43,7 +41,6 @@ export default async function FoodPage({params, searchParams}) {
 		)
 	} else {
 		let data = await response.json()
-		console.log("Response:", data)
 		return (
 			<>
 				<div className="mt-20 mb-20">

@@ -8,7 +8,6 @@ export default async function LocationPage({params}) {
 	let response = await fetch(`${process.env.ROOT_URL}/api/weather?address=${params.location}`)
 
 	if (response.status === 404) {
-		console.log("Response:", response.status)
 		return (
 			<>
 				<p className="text-center mt-10 text-red-600 font-bold pt-10">
@@ -20,7 +19,6 @@ export default async function LocationPage({params}) {
 			</>
 		)
 	} else if (response.status === 500) {
-		console.log("Response:", response.status)
 		return (
 			<>
 				<p className="text-center mt-10 text-red-600 font-bold">Something went wrong. Please, try again.</p>
@@ -31,7 +29,6 @@ export default async function LocationPage({params}) {
 		)
 	} else {
 		let data = await response.json()
-		console.log("Response:", data)
 		return (
 			<>
 				{
