@@ -19,8 +19,8 @@ export async function GET(request) {
 				}
 			})
 		} else {
-			console.log("API Fetch:", data.hits)
-			return new Response(JSON.stringify(data.hits), {
+			console.log("API Fetch:", data)
+			return new Response(JSON.stringify(data), {
 				status: 200,
 				headers: {
 					"Content-Type": "application/json"

@@ -62,7 +62,7 @@ export default async function FoodPage({params, searchParams}) {
 					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
 						{data
-							? data.map((recipe, index) => (
+							? data.hits.map((recipe, index) => (
 									<Link
 										key={index}
 										className="bg-white rounded-lg shadow-md cursor-pointer"
