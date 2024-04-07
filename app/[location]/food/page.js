@@ -71,6 +71,7 @@ export default async function FoodPage({params, searchParams}) {
 											width={500}
 											height={750}
 											className="rounded-t-lg w-full h-48 object-cover"
+											unoptimized={true}
 										/>
 										<div className="p-5">
 											<p className="text-md font-semibold">{recipe.recipe.label}</p>
