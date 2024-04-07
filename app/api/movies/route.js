@@ -9,7 +9,8 @@ export async function GET(request) {
 		const res = await fetch(url)
 		let data = await res.json()
 
-		if (data.cod === "404") {
+		if (data.cod === "404" || data.total_results === 0) {
+			console.log("API Fetch:", data.message || "No movies found")
 			return new Response(JSON.stringify({error: data.message}), {
 				status: 404,
 				headers: {
@@ -17,6 +18,7 @@ export async function GET(request) {
 				}
 			})
 		} else {
+			console.log("API Fetch:", data)
 			return new Response(JSON.stringify(data), {
 				status: 200,
 				headers: {
@@ -25,6 +27,7 @@ export async function GET(request) {
 			})
 		}
 	} catch (error) {
+		console.log("API Fetch:", error)
 		return new Response(JSON.stringify({error: error.message}), {
 			status: 500,
 			headers: {

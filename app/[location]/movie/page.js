@@ -8,6 +8,7 @@ export default async function MoviePage({params, searchParams}) {
 	let response = await fetch(`${process.env.ROOT_URL}/api/movies?weather=${searchParams.w}`)
 
 	if (response.status === 404) {
+		console.log("Response:", response.status)
 		return (
 			<>
 				<div className="grid grid-cols-2 font-bold text-lg pt-10">
@@ -25,6 +26,7 @@ export default async function MoviePage({params, searchParams}) {
 			</>
 		)
 	} else if (response.status === 500) {
+		console.log("Response:", response.status)
 		return (
 			<>
 				<div className="grid grid-cols-2 font-bold text-lg pt-10">
@@ -42,7 +44,7 @@ export default async function MoviePage({params, searchParams}) {
 		)
 	} else {
 		let data = await response.json()
-
+		console.log("Response:", data)
 		return (
 			<>
 				<div className="mt-20 mb-20">
@@ -65,16 +67,14 @@ export default async function MoviePage({params, searchParams}) {
 										<Image
 											src={
 												movie.poster_path
-													? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+													? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
 													: imagePlaceholder
 											}
 											alt={movie.title || "Title no available"}
-											blurDataURL={`data:https://image.tmdb.org/t/p/300${movie.poster_path}`}
+											className="rounded-t-lg w-full h-96"
 											width={500}
 											height={450}
-											className="rounded-t-lg w-full h-96 object-cover"
 										/>
-
 										<div className="p-5">
 											<p className="text-md font-semibold ">{movie.title}</p>
 											<div className="flex items-center gap-1">
@@ -101,8 +101,5 @@ export default async function MoviePage({params, searchParams}) {
 				</div>
 			</>
 		)
-		//get the title for all movies
-		let movieTitle = data.results.map(movie => movie.title)
-		console.log(movieTitle)
 	}
 }
