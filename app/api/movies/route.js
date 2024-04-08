@@ -10,7 +10,7 @@ export async function GET(request) {
 		let data = await res.json()
 
 		if (data.cod === "404" || data.total_results === 0) {
-			return new Response(JSON.stringify({error: data.message} || {error: "No movies found"}), {
+			return new Response(JSON.stringify({error: "No movies found"}), {
 				status: 404,
 				headers: {
 					"Content-Type": "application/json"
@@ -25,7 +25,7 @@ export async function GET(request) {
 			})
 		}
 	} catch (error) {
-		return new Response(JSON.stringify({error: error.message} || {error: "Something went wrong"}), {
+		return new Response(JSON.stringify({error: "Something went wrong"}), {
 			status: 500,
 			headers: {
 				"Content-Type": "application/json"

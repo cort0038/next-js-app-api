@@ -2,16 +2,11 @@ export async function GET(request) {
 	const params = new URL(request.url).searchParams
 	const weather = params.get("weather")
 	const apiKey = process.env.FOOD_API_KEY
-	
+
 	let url = `https://api.spoonacular.com/recipes/complexSearch?query=${weather}&apiKey=${apiKey}`
 
 	try {
 		const res = await fetch(url)
-
-		if (!res.ok) {
-			throw new Error(`API request failed with status: ${res.status}`)
-		}
-
 		let data = await res.json()
 
 		if (data.totalResults === 0) {
