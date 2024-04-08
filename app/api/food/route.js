@@ -7,10 +7,15 @@ export async function GET(request) {
 
 	try {
 		const res = await fetch(url)
+
+		if (!res.ok) {
+			throw new Error(`API request failed with status: ${res.status}`)
+		}
+
 		let data = await res.json()
 
 		if (data.totalResults === 0) {
-			return new Response(JSON.stringify({error: data.message} || {error: "No recipes found"}), {
+			return new Response(JSON.stringify({error: "No recipes found"}), {
 				status: 404,
 				headers: {
 					"Content-Type": "application/json"
@@ -26,7 +31,7 @@ export async function GET(request) {
 		}
 	} catch (error) {
 		console.log(error)
-		return new Response(JSON.stringify({error: error.message} || {error: "Something went wrong"}), {
+		return new Response(JSON.stringify({error: "Something went wrong"}), {
 			status: 500,
 			headers: {
 				"Content-Type": "application/json"
