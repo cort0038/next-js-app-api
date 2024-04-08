@@ -41,7 +41,6 @@ export default async function FoodPage({params, searchParams}) {
 		)
 	} else {
 		let data = await response.json()
-		let dataTest = data.results
 
 		return (
 			<>
@@ -61,7 +60,7 @@ export default async function FoodPage({params, searchParams}) {
 					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
 						{data
-							? dataTest.map((recipe, index) => (
+							? data.results.map((recipe, index) => (
 									<div key={index} className="bg-white rounded-lg shadow-md" target="_blank">
 										<Image
 											src={recipe.image ? recipe.image : "https://via.placeholder.com/750x500"}

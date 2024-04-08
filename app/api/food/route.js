@@ -3,7 +3,7 @@ export async function GET(request) {
 	const weather = params.get("weather")
 	const apiKey = process.env.SPOONACULAR_API_KEY
 
-	let url = `https://api.spoonacular.com/recipes/complexSearch?query=${weather}&apiKey=${apiKey}&number=20`
+	let url = `https://api.spoonacular.com/recipes/complexSearch?query=${weather}&apiKey=${apiKey}`
 
 	try {
 		const res = await fetch(url)
