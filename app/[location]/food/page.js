@@ -41,7 +41,6 @@ export default async function FoodPage({params, searchParams}) {
 		)
 	} else {
 		let data = await response.json()
-		console.log(data.hits)
 
 		return (
 			<>
@@ -75,9 +74,9 @@ export default async function FoodPage({params, searchParams}) {
 											className="rounded-t-lg w-full h-48 object-cover"
 											unoptimized={true}
 										/> */}
-										{recipe.recipe.image ? (
+										{response.headers.get("content-type").includes("image") ? (
 											<Image
-												src={recipe.recipe.image}
+												src={recipe.recipe.image ? recipe.recipe.image : "https://via.placeholder.com/750x500"}
 												alt={recipe.recipe.label || "No image available"}
 												width={500}
 												height={750}
@@ -87,10 +86,13 @@ export default async function FoodPage({params, searchParams}) {
 										) : (
 											<img
 												src="https://via.placeholder.com/750x500"
-												alt="Placeholder"
+												alt="No image available"
+												width={500}
+												height={750}
 												className="rounded-t-lg w-full h-48 object-cover"
 											/>
 										)}
+
 										<div className="p-5">
 											<p className="text-md font-semibold">{recipe.recipe.label}</p>
 											<div className="flex items-center gap-3">
