@@ -6,6 +6,8 @@ import Link from "next/link"
 export default async function FoodPage({params, searchParams}) {
 	let response = await fetch(`${process.env.ROOT_URL}/api/food?weather=${searchParams.w}`)
 
+	let data = await response.json()
+
 	if (response.status === 404) {
 		return (
 			<>
@@ -40,7 +42,6 @@ export default async function FoodPage({params, searchParams}) {
 			</>
 		)
 	} else {
-		let data = await response.json()
 		let recipes = data.results
 
 		return (
