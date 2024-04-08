@@ -1,8 +1,8 @@
 export async function GET(request) {
 	const params = new URL(request.url).searchParams
 	const weather = params.get("weather")
-	const apiKey = process.env.SPOONACULAR_API_KEY
-
+	const apiKey = process.env.FOOD_API_KEY
+	
 	let url = `https://api.spoonacular.com/recipes/complexSearch?query=${weather}&apiKey=${apiKey}`
 
 	try {
