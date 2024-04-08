@@ -5,7 +5,7 @@ import Link from "next/link"
 
 export default async function FoodPage({params, searchParams}) {
 	let response = await fetch(`${process.env.ROOT_URL}/api/food?weather=${searchParams.w}`)
-	
+
 	if (response.status === 404) {
 		return (
 			<>
@@ -60,10 +60,14 @@ export default async function FoodPage({params, searchParams}) {
 					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
 						{data
-							? data.results.map((recipe, index) => (
-									<div key={index} className="bg-white rounded-lg shadow-md" target="_blank">
+							? data.results.map(recipe => (
+									<div key={recipe.id} className="bg-white rounded-lg shadow-md" target="_blank">
 										<Image
-											src={recipe.image ? recipe.image : "https://via.placeholder.com/750x500"}
+											src={
+												recipe.image
+													? `https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`
+													: "https://via.placeholder.com/750x500"
+											}
 											alt={"Food Image"}
 											width={500}
 											height={750}
