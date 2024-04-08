@@ -66,7 +66,7 @@ export default async function FoodPage({params, searchParams}) {
 											src={
 												recipe.image
 													? `https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`
-													: "https://via.placeholder.com/750x500"
+													: "https://placehold.co/600x400"
 											}
 											alt={"Food Image"}
 											width={500}
