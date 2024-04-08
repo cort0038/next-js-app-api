@@ -60,7 +60,7 @@ export default async function FoodPage({params, searchParams}) {
 						Recipes for {decodeURIComponent(params.location)} weather
 					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
-						{data.results
+						{/* {data
 							? data.results.map((recipe, index) => (
 									<div key={index} className="bg-white rounded-lg shadow-md">
 										<Image
@@ -88,7 +88,26 @@ export default async function FoodPage({params, searchParams}) {
 											<div className="skeleton h-4 w-full" />
 										</div>
 									</div>
-							  ))}
+							  ))} */}
+						{data.results.map((recipe, index) => (
+							<div key={index} className="bg-white rounded-lg shadow-md">
+								<Image
+									src={
+										recipe.image
+											? `https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`
+											: "https://placehold.co/600x400"
+									}
+									alt={recipe.title || "Recipe Image"}
+									width={500}
+									height={750}
+									className="rounded-t-lg w-full h-48 object-cover"
+								/>
+								<div className="p-5">
+									<p className="text-md font-semibold">{recipe.title}</p>
+									<div className="flex items-center gap-3"></div>
+								</div>
+							</div>
+						))}
 					</div>
 				</div>
 			</>
