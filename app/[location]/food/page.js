@@ -41,7 +41,7 @@ export default async function FoodPage({params, searchParams}) {
 		)
 	} else {
 		let data = await response.json()
-		console.log(data)
+		
 		return (
 			<>
 				<div className="mt-20 mb-20">
@@ -59,7 +59,7 @@ export default async function FoodPage({params, searchParams}) {
 						Recipes for {decodeURIComponent(params.location)} weather
 					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
-						{data
+						{data && data.results
 							? data.results.map((recipe, index) => (
 									<div key={index} className="bg-white rounded-lg shadow-md">
 										<Image
