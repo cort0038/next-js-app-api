@@ -66,29 +66,14 @@ export default async function FoodPage({params, searchParams}) {
 										className="bg-white rounded-lg shadow-md cursor-pointer"
 										target="_blank"
 										href={recipe.recipe.url}>
-										{/* I was getting back an xml file back each hour when the assigned token
-										for Amazon on the image request was expired. It was randomly happening. Something it gets the
-										response right*/}
-
-										{response.headers.get("content-type").includes("image") ? (
-											<Image
-												src={recipe.recipe.image}
-												alt={recipe.recipe.label}
-												width={500}
-												height={750}
-												className="rounded-t-lg w-full h-48 object-cover"
-												unoptimized={true}
-											/>
-										) : (
-											<Image
-												src="https://via.placeholder.com/750x500"
-												alt="No image available"
-												width={500}
-												height={750}
-												className="rounded-t-lg w-full h-48 object-cover"
-											/>
-										)}
-
+										<Image
+											src={recipe.recipe.image ? recipe.recipe.image : "https://via.placeholder.com/750x500"}
+											alt={recipe.recipe.label ? recipe.recipe.label : "No image available"}
+											width={500}
+											height={750}
+											className="rounded-t-lg w-full h-48 object-cover"
+											unoptimized={true}
+										/>
 										<div className="p-5">
 											<p className="text-md font-semibold">{recipe.recipe.label}</p>
 											<div className="flex items-center gap-3">

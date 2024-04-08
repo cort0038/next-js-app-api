@@ -6,7 +6,14 @@ export async function GET(request) {
 	let url = `https://api.openweathermap.org/data/2.5/weather?q=${address}&appid=${apiKey}&units=metric`
 
 	try {
-		const res = await fetch(url)
+		const res = await fetch(url, {
+			method: "GET",
+			headers: {
+				accept: "application/json"
+			},
+			next: {revalidate: 60}
+		})
+		
 		let data = await res.json()
 
 		if (data.cod === "404") {

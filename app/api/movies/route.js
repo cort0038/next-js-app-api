@@ -6,7 +6,14 @@ export async function GET(request) {
 	let url = `https://api.themoviedb.org/3/search/movie?query=${weather}&include_adult=false&language=en-US&page=1&api_key=${apiKey}`
 
 	try {
-		const res = await fetch(url)
+		const res = await fetch(url, {
+			method: "GET",
+			headers: {
+				accept: "application/json"
+			},
+			next: {revalidate: 60}
+		})
+
 		let data = await res.json()
 
 		if (data.cod === "404" || data.total_results === 0) {
