@@ -6,8 +6,6 @@ import Link from "next/link"
 export default async function FoodPage({params, searchParams}) {
 	let response = await fetch(`${process.env.ROOT_URL}/api/food?weather=${searchParams.w}`)
 
-	let data = await response.json()
-
 	if (response.status === 404) {
 		return (
 			<>
@@ -42,7 +40,7 @@ export default async function FoodPage({params, searchParams}) {
 			</>
 		)
 	} else {
-		let recipes = data.results
+		let data = await response.json()
 
 		return (
 			<>
@@ -61,15 +59,39 @@ export default async function FoodPage({params, searchParams}) {
 						Recipes for {decodeURIComponent(params.location)} weather
 					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
-						{/* {Render image for all recipes from data} */}
-						{recipes.map((recipe, index) => (
-							<div key={index} className="bg-white rounded-lg shadow-md">
-								<Image src={recipe.image} alt={recipe.title} width={300} height={200} className="rounded-t-lg" />
-								<div className="p-4">
-									<h2 className="text-xl font-bold">{recipe.title}</h2>
-								</div>
-							</div>
-						))}
+						{data
+							? data.hits.map((recipe, index) => (
+									<Link
+										key={index}
+										className="bg-white rounded-lg shadow-md cursor-pointer"
+										target="_blank"
+										href={recipe.recipe.url}>
+										<Image
+											src={recipe.recipe.image ? recipe.recipe.image : "https://via.placeholder.com/750x500"}
+											alt={recipe.recipe.label || "No image available"}
+											width={500}
+											height={750}
+											className="rounded-t-lg w-full h-48 object-cover"
+											unoptimized={true}
+										/>
+										<div className="p-5">
+											<p className="text-md font-semibold">{recipe.recipe.label}</p>
+											<div className="flex items-center gap-3">
+												<p className="text-sm">Meal Type:</p>
+												<p className="text-sm text-gray-500">{recipe.recipe.mealType}</p>
+											</div>
+										</div>
+									</Link>
+							  ))
+							: Array.from({length: 6}).map((_, index) => (
+									<div key={index} className="bg-white rounded-lg shadow-md animate-pulse">
+										<div className="skeleton h-48 w-full rounded-t-lg" />
+										<div className="p-5">
+											<div className="skeleton h-8 w-full mb-2" />
+											<div className="skeleton h-4 w-full" />
+										</div>
+									</div>
+							  ))}
 					</div>
 				</div>
 			</>

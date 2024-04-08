@@ -1,15 +1,16 @@
 export async function GET(request) {
 	const params = new URL(request.url).searchParams
 	const weather = params.get("weather")
-	const apiKey = process.env.FOOD_API_KEY
+	const appID = process.env.EDAMAN_ID
+	const apiKey = process.env.EDAMAN_API_KEY
 
-	let url = `https://api.spoonacular.com/recipes/complexSearch?query=${weather}&apiKey=${apiKey}`
+	let url = `https://api.edamam.com/api/recipes/v2?type=public&q=${weather}&app_id=${appID}&app_key=${apiKey}`
 
 	try {
 		const res = await fetch(url)
 		let data = await res.json()
 
-		if (data.totalResults === 0) {
+		if (data.cod === "404" || data.count === 0) {
 			return new Response(JSON.stringify({error: "No recipes found"}), {
 				status: 404,
 				headers: {
