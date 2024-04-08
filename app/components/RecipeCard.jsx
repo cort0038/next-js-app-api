@@ -13,7 +13,7 @@ export default function RecipeCard({data}) {
 			return null
 		}
 
-		let conditions = data.weather[0].main.toLowerCase()
+		let conditions = data.weather[0].main
 		let url = `/${location}/food?w=${conditions}`
 		router.push(url)
 	}
