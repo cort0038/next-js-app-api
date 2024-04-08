@@ -41,7 +41,7 @@ export default async function FoodPage({params, searchParams}) {
 		)
 	} else {
 		let data = await response.json()
-		console.log("TEST", data.results)
+		let recipes = data.results
 
 		return (
 			<>
@@ -61,8 +61,7 @@ export default async function FoodPage({params, searchParams}) {
 					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
 						{/* {Render image for all recipes from data} */}
-
-						{data.results.map((recipe, index) => (
+						{recipes.map((recipe, index) => (
 							<div key={index} className="bg-white rounded-lg shadow-md">
 								<Image src={recipe.image} alt={recipe.title} width={300} height={200} className="rounded-t-lg" />
 								<div className="p-4">
