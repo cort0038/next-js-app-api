@@ -60,51 +60,13 @@ export default async function FoodPage({params, searchParams}) {
 						Recipes for {decodeURIComponent(params.location)} weather
 					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
-						{/* {data
-							? data.results.map((recipe, index) => (
-									<div key={index} className="bg-white rounded-lg shadow-md">
-										<Image
-											src={
-												recipe.image
-													? `https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`
-													: "https://placehold.co/600x400"
-											}
-											alt={recipe.title || "Recipe Image"}
-											width={500}
-											height={750}
-											className="rounded-t-lg w-full h-48 object-cover"
-										/>
-										<div className="p-5">
-											<p className="text-md font-semibold">{recipe.title}</p>
-											<div className="flex items-center gap-3"></div>
-										</div>
-									</div>
-							  ))
-							: Array.from({length: 6}).map((_, index) => (
-									<div key={index} className="bg-white rounded-lg shadow-md animate-pulse">
-										<div className="skeleton h-48 w-full rounded-t-lg" />
-										<div className="p-5">
-											<div className="skeleton h-8 w-full mb-2" />
-											<div className="skeleton h-4 w-full" />
-										</div>
-									</div>
-							  ))} */}
+						{/* {Render image for all recipes from data} */}
+
 						{data.results.map((recipe, index) => (
 							<div key={index} className="bg-white rounded-lg shadow-md">
-								<Image
-									src={
-										recipe.image
-											? `https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`
-											: "https://placehold.co/600x400"
-									}
-									alt={recipe.title || "Recipe Image"}
-									width={500}
-									height={750}
-									className="rounded-t-lg w-full h-48 object-cover"
-								/>
-								<div className="p-5">
-									<p className="text-md font-semibold">{recipe.title}</p>
-									<div className="flex items-center gap-3"></div>
+								<Image src={recipe.image} alt={recipe.title} width={300} height={200} className="rounded-t-lg" />
+								<div className="p-4">
+									<h2 className="text-xl font-bold">{recipe.title}</h2>
 								</div>
 							</div>
 						))}
