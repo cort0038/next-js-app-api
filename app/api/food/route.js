@@ -17,7 +17,6 @@ export async function GET(request) {
 				}
 			})
 		} else {
-			console.log(data.results)
 			return new Response(JSON.stringify(data), {
 				status: 200,
 				headers: {

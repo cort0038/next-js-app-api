@@ -41,6 +41,7 @@ export default async function FoodPage({params, searchParams}) {
 		)
 	} else {
 		let data = await response.json()
+		console.log("TEST", data.results)
 
 		return (
 			<>
@@ -68,7 +69,7 @@ export default async function FoodPage({params, searchParams}) {
 													? `https://img.spoonacular.com/recipes/${recipe.id}-636x393.jpg`
 													: "https://placehold.co/600x400"
 											}
-											alt={"Food Image"}
+											alt={recipe.title || "Recipe Image"}
 											width={500}
 											height={750}
 											className="rounded-t-lg w-full h-48 object-cover"
