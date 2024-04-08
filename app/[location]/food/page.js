@@ -60,7 +60,7 @@ export default async function FoodPage({params, searchParams}) {
 						Recipes for {decodeURIComponent(params.location)} weather
 					</h2>
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mt-10">
-						{data && data.results
+						{data.results
 							? data.results.map((recipe, index) => (
 									<div key={index} className="bg-white rounded-lg shadow-md">
 										<Image
