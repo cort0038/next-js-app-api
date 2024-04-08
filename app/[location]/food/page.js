@@ -41,7 +41,7 @@ export default async function FoodPage({params, searchParams}) {
 		)
 	} else {
 		let data = await response.json()
-		
+
 		return (
 			<>
 				<div className="mt-20 mb-20">
